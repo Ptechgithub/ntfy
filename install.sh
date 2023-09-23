@@ -78,10 +78,11 @@ uninstall_ntfy() {
   fi
 
   # Stop and disable the ntfy service
-  sudo systemctl daemon-reload
+  
   sudo systemctl stop ntfy
   sudo systemctl disable ntfy
-
+  sudo rm /etc/systemd/system/ntfy
+ sudo systemctl daemon-reload
   # Remove ntfy package
   sudo apt remove ntfy --purge -y
   sudo rm -rf /etc/ntfy
@@ -110,7 +111,7 @@ edit_config() {
 
 # Main menu
 clear
-echo "By -1-> Peyman * Github.com/Ptechgithub * "
+echo "By --> Peyman * Github.com/Ptechgithub * "
 echo ""
 echo "Select an option:"
 echo "1) Install ntfy"
