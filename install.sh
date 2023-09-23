@@ -60,11 +60,12 @@ install_ntfy() {
   # Download the new server.yml from the given URL and save it in /etc/ntfy/
   sudo curl -fsSL -o /etc/ntfy/server.yml https://raw.githubusercontent.com/Ptechgithub/ntfy/main/server.yml
   setup_certificate
+  touch /var/log/ntfy.log
+  sudo chown ntfy:ntfy /var/log/ntfy.log
   # Enable and start the ntfy service
   sudo systemctl daemon-reload
   sudo systemctl enable ntfy
   sudo systemctl start ntfy
-  sudo chown ntfy:ntfy /var/log/ntfy.log
   echo "ntfy has been installed."
 }
 
