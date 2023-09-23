@@ -71,27 +71,30 @@ install_ntfy() {
 
 # Function to uninstall ntfy
 uninstall_ntfy() {
-  # Check if the ntfy service is installed and running
-  if systemctl is-enabled --quiet ntfy; then
-    echo "ntfy is not installed or is not currently running."
-    exit 1
+  # Check if the ntfy service is installed
+  if systemctl is-active --quiet ntfy.service; then
+    echo "ntfy is currently installed."
+
+    # Stop and disable the ntfy service
+    sudo systemctl stop ntfy
+    sudo systemctl disable ntfy
+    sudo rm /etc/systemd/system/ntfy
+    sudo systemctl daemon-reload
+
+    # Remove ntfy package
+    sudo apt remove ntfy --purge -y
+
+    # Additional uninstallation steps
+    sudo rm -rf /etc/ntfy
+    sudo rm -rf /etc/apt/keyrings
+    sudo rm -rf /etc/letsencrypt/live/$DOMAIN
+    # Remove the Heckel repository file
+    sudo rm -f /etc/apt/sources.list.d/archive.heckel.io.list
+
+    echo "ntfy has been uninstalled."
+  else
+    echo "ntfy is not currently installed."
   fi
-
-  # Stop and disable the ntfy service
-  
-  sudo systemctl stop ntfy
-  sudo systemctl disable ntfy
-  sudo rm /etc/systemd/system/ntfy
- sudo systemctl daemon-reload
-  # Remove ntfy package
-  sudo apt remove ntfy --purge -y
-  sudo rm -rf /etc/ntfy
-  sudo rm -rf /etc/apt/keyrings
-  sudo rm -rf /etc/letsencrypt/live/$DOMAIN
-  # Remove the Heckel repository file
-  sudo rm -f /etc/apt/sources.list.d/archive.heckel.io.list
-
-  echo "ntfy has been uninstalled."
 }
 
 edit_config() {
