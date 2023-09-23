@@ -13,7 +13,12 @@ ntfy user del USER-NAME                 # Delete user USER-NAME
 ntfy user change-pass USER-NAME         # Change password for user USER-NAME
 ntfy user change-role USER-NAME admin   # Make user USER-NAME an admin
 ntfy user change-tier USER-NAME pro     # Change USER-NAME's tier to "pro"
-sudo ntfy access USER-NAME TOPIC rw   # Give access to a specific topic
+
+ntfy access                            # Shows access control list (alias: 'ntfy user list')
+ntfy access USER-NAME                   # Shows access control entries for USERNAME
+ntfy access USER-NAME TOPIC PERMISSION  # Allow/deny access for USERNAME to TOPIC
+ntfy access USER-NAME TOPIC rw   # Give (read-write) access to a specific topic
+
 ``
 
 ``
