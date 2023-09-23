@@ -31,8 +31,8 @@ write-only (aliases: write, wo): Allows only publishing to the topic, but not su
 deny (alias: none): Allows neither publishing nor subscribing to a topic
 
 
-``
+```
 curl -d "send your message " url/topic
 
 curl -u USER-NAME:PASSWORD -d "send your message " url/topic
-``
+```
