@@ -99,7 +99,7 @@ edit_config() {
 
 # Main menu
 clear
-echo "By -1-> Peyman * Github.com/Ptechgithub * "
+echo "By --> Peyman * Github.com/Ptechgithub * "
 echo ""
 echo "Select an option:"
 echo "1) Install ntfy"
