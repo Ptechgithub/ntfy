@@ -5,7 +5,9 @@ bash <(curl -fsSL https://raw.githubusercontent.com/Ptechgithub/ntfy/main/instal
 
 - Example commands (type ntfy user --help or ntfy user COMMAND --help for more details):
 
+
 ``
+
 ntfy user list                     # Shows list of users (alias: 'ntfy access')
 ntfy user add USER-NAME                 # Add regular user USER-NAME  
 ntfy user add --role=admin USER-NAME    # Add admin user USER-NAME
