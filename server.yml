@@ -1,3 +1,5 @@
+#Enter ctrl + x and then press y to Exit
+
 #base-url: "https://YourDomain.com"
 #listen-http: ":80"
 #listen-https: ":443"
