@@ -8,7 +8,7 @@ sudo ntfy user list
 ``
 
 ``
-sudo ntfy change-role NAME admin/user
+sudo ntfy --role=admin NAME admin/user
 ``
 
 ``
