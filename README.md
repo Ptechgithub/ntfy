@@ -17,5 +17,7 @@ sudo ntfy access USER-NAME TOPIC rw   # Give access to a specific topic
 ``
 
 ``
+curl -d "send your message " url/topic
+
 curl -u USER-NAME:PASSWORD -d "send your message " url/topic
 ``
