@@ -1,3 +1,8 @@
+```
+bash <(curl -fsSL https://raw.githubusercontent.com/Ptechgithub/ntfy/main/install.sh)
+```
+
+
 ``
 sudo ntfy user list
 ``
