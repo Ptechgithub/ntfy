@@ -67,6 +67,7 @@ install_ntfy() {
   sudo systemctl daemon-reload
   sudo systemctl enable ntfy
   sudo systemctl start ntfy
+  sudo chown ntfy:ntfy /var/log/ntfy.log
   echo "ntfy has been installed."
 }
 
