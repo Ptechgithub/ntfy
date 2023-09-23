@@ -98,7 +98,7 @@ edit_config() {
         # Edit the config file with nano
         sudo nano /etc/ntfy/server.yml
     else
-        echo "The config file (/etc/ntfy/server.yml) does not exist. Please make sure it's created first."
+        echo "The config file (/etc/ntfy/server.yml) does not exist. Please install ntfy first"
     fi
 }
 
