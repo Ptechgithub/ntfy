@@ -80,6 +80,7 @@ uninstall_ntfy() {
   sudo apt remove ntfy --purge -y
   sudo rm -rf /etc/ntfy
   sudo rm -rf /etc/apt/keyrings
+  sudo rm -rf /etc/letsencrypt/live/$DOMAIN
   # Remove the Heckel repository file
   sudo rm -f /etc/apt/sources.list.d/archive.heckel.io.list
 
