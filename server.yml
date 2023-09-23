@@ -33,6 +33,6 @@
 #attachment-expiry-duration: "3h"
 
 #logs
-#log-level: info
-#log-format: json
-#log-file: "/var/log/ntfy.log"
+log-level: info
+log-format: json
+log-file: "/var/log/ntfy.log"
