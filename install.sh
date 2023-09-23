@@ -111,7 +111,7 @@ echo "1) Install ntfy"
 echo "2) Uninstall ntfy"
 echo "3) Edit config"
 echo "0) Exit"
-read -p "Enter your choice: " choice
+read -p "Please choose: " choice
 
 case $choice in
   1)
