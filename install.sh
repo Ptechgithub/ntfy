@@ -110,6 +110,7 @@ echo "Select an option:"
 echo "1) Install ntfy"
 echo "2) Uninstall ntfy"
 echo "3) Edit config"
+echo "0) Exit"
 read -p "Enter your choice: " choice
 
 case $choice in
@@ -122,7 +123,10 @@ case $choice in
   3)
     edit_config
     ;;
-  *)
+  0)   
+    exit
+    ;;
+    *)
     echo "Invalid choice"
     ;;
 esac
