@@ -88,13 +88,18 @@ uninstall_ntfy() {
 }
 
 edit_config() {
-    # Install nano if it's not already installed
-    if ! command -v nano &> /dev/null; then
-        sudo apt install nano -y
-    fi
+    # Check if the config file exists
+    if [ -e /etc/ntfy/server.yml ]; then
+        # Install nano if it's not already installed
+        if ! command -v nano &> /dev/null; then
+            sudo apt install nano -y
+        fi
 
-    # Edit the config  file with nano
-    sudo nano /etc/ntfy/server.yml
+        # Edit the config file with nano
+        sudo nano /etc/ntfy/server.yml
+    else
+        echo "The config file (/etc/ntfy/server.yml) does not exist. Please make sure it's created first."
+    fi
 }
 
 # Main menu
