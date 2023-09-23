@@ -71,6 +71,12 @@ install_ntfy() {
 
 # Function to uninstall ntfy
 uninstall_ntfy() {
+  # Check if the ntfy service is installed and running
+  if ! systemctl is-active --quiet ntfy; then
+    echo "ntfy is not installed or is not currently running."
+    exit 1
+  fi
+
   # Stop and disable the ntfy service
   sudo systemctl daemon-reload
   sudo systemctl stop ntfy
