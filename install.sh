@@ -93,7 +93,7 @@ uninstall_ntfy() {
 
     echo "ntfy has been uninstalled."
   else
-    echo "ntfy is not currently installed."
+    echo "ntfy is not  installed."
   fi
 }
 
