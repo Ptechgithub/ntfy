@@ -211,7 +211,7 @@ uninstall_ntfy_docker() {
     rm -rf /etc/ntfy
     echo "ntfy Docker container has been uninstalled."
   else
-    echo "ntfy Docker container is not running or does not exist, so there's nothing to uninstall."
+    echo "ntfy Docker container is not running or does not exist."
   fi
 }
 
