@@ -51,11 +51,37 @@ setup_certificate() {
     fi
 }
 
-centos() {
+install_centos() {
   sudo rpm -ivh https://github.com/binwiederhier/ntfy/releases/download/v2.7.0/ntfy_2.7.0_linux_$ARCH.rpm
-  sudo systemctl enable ntfy 
+  sudo systemctl enable ntfy
+  # Download the new server.yml from the given URL and save it in /etc/ntfy/
+  sudo curl -fsSL -o /etc/ntfy/server.yml https://raw.githubusercontent.com/Ptechgithub/ntfy/main/server.yml
+  setup_certificate
+  touch /var/log/ntfy.log
+  sudo chown ntfy:ntfy /var/log/ntfy.log
   sudo systemctl start ntfy
 }
+
+uninstall_ntfy_centos() {
+  # Check if the ntfy service is installed
+  if systemctl is-active --quiet ntfy.service; then
+    echo "ntfy is currently installed."
+
+    # Stop and disable the ntfy service
+    sudo systemctl stop ntfy
+    sudo systemctl disable ntfy
+    sudo rpm -e ntfy
+    sudo rm -rf /etc/letsencrypt/live/$DOMAIN
+    # Additional uninstallation steps
+    sudo rm -rf /etc/ntfy
+    sudo rm /var/log/ntfy.log
+
+    echo "ntfy has been uninstalled."
+  else
+    echo "ntfy is not installed."
+  fi
+}
+
 
 # Function to install ntfy
 install_ntfy() {
@@ -108,6 +134,7 @@ uninstall_ntfy() {
     sudo rm -rf /etc/letsencrypt/live/$DOMAIN
     # Remove the Heckel repository file
     sudo rm -f /etc/apt/sources.list.d/archive.heckel.io.list
+    sudo rm /var/log/ntfy.log
 
     echo "ntfy has been uninstalled."
   else
@@ -149,13 +176,17 @@ read -p "Please choose: " choice
 case $choice in
   1)
     if [ "$(cat /etc/*-release | grep -Ei 'fedora|redhat|centos')" != "" ]; then
-        centos
+        install_centos
     else
         install_ntfy
     fi
     ;;
   2)
-    uninstall_ntfy
+    if [ "$(cat /etc/*-release | grep -Ei 'fedora|redhat|centos')" != "" ]; then
+        uninstall_ntfy_centos
+    else
+        uninstall_ntfy
+    fi
     ;;
   3)
     edit_config
