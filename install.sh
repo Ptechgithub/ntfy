@@ -175,6 +175,30 @@ edit_config() {
 }
 
 
+# install ntfy using Docker
+install_docker_ntfy() {
+  # Check if Docker is installed
+  if ! command -v docker &> /dev/null; then
+    # Install Docker if it's not installed
+    echo "Docker is not installed. Installing Docker..."
+    curl -fsSL https://get.docker.com -o get-docker.sh && bash get-docker.sh
+    
+  fi
+
+  # Run the ntfy Docker command
+  docker run \
+    -v /var/cache/ntfy:/var/cache/ntfy \
+    -v /etc/ntfy:/etc/ntfy \
+    -p 80:80 \
+    -itd \
+    binwiederhier/ntfy \
+    serve \
+    --cache-file /var/cache/ntfy/cache.db
+
+  echo "ntfy has been installed using Docker."
+}
+
+
 # Main menu
 clear
 echo "By --> Peyman * Github.com/Ptechgithub * "
@@ -182,7 +206,8 @@ echo ""
 echo "Select an option:"
 echo "1) Install ntfy"
 echo "2) Uninstall ntfy"
-echo "3) Edit config"
+echo "4) install with Docker"
+echo "4) Edit config"
 echo "0) Exit"
 read -p "Please choose: " choice
 
@@ -202,7 +227,10 @@ case $choice in
     fi
     ;;
   3)
-    edit_config
+    install_docker_ntfy
+    ;;
+  4)
+     edit_config
     ;;
   0)   
     exit
