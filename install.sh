@@ -35,7 +35,7 @@ detect_distribution() {
 check_dependencies() {
     detect_distribution
     $PM update -y && $PM upgrade
-    local dependencies=("nano" "certbot")
+    local dependencies=("nano" "certbot" "epel-release")
     
     for dep in "${dependencies[@]}"; do
         if ! command -v "${dep}" &> /dev/null; then
@@ -87,7 +87,6 @@ setup_certificate() {
 install_centos() {
   check_dependencies
   setup_certificate
-  sudo $PM install epel-release -y
   # Check if ntfy is already installed
   if rpm -q ntfy &>/dev/null; then
     echo "ntfy is already installed."
