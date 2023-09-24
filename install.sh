@@ -52,7 +52,7 @@ setup_certificate() {
 }
 
 centos() {
-  sudo rpm -ivh https://github.com/binwiederhier/ntfy/releases/download/v2.7.0/ntfy_2.7.0_linux_amd64.rpm
+  sudo rpm -ivh https://github.com/binwiederhier/ntfy/releases/download/v2.7.0/ntfy_2.7.0_linux_$ARCH.rpm
   sudo systemctl enable ntfy 
   sudo systemctl start ntfy
 }
