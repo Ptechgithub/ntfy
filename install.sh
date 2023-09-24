@@ -12,22 +12,41 @@ else
     exit 1
 fi
 
-package() {
-    # Detect the package manager
-    if command -v apt &> /dev/null; then
-        PM="apt"
-    elif command -v dnf &> /dev/null; then
-        PM="dnf"
-    elif command -v yum &> /dev/null; then
-        PM="yum"
+detect_distribution() {
+    # Detect the Linux distribution
+    local supported_distributions=("ubuntu" "debian" "centos" "fedora")
+    
+    if [ -f /etc/os-release ]; then
+        source /etc/os-release
+        if [[ "${ID}" = "ubuntu" || "${ID}" = "debian" || "${ID}" = "centos" || "${ID}" = "fedora" ]]; then
+            PM="apt-get"
+            [ "${ID}" = "centos" ] && PM="yum"
+            [ "${ID}" = "fedora" ] && PM="dnf"
+        else
+            echo "Unsupported distribution!"
+            exit 1
+        fi
     else
-        echo "Unsupported package manager. Please install Certbot manually."
+        echo "Unsupported distribution!"
         exit 1
     fi
 }
 
+check_dependencies() {
+    detect_distribution
+    local dependencies=("nano" "certbot")
+    
+    for dep in "${dependencies[@]}"; do
+        if ! command -v "${dep}" &> /dev/null; then
+            echo "${dep} is not installed. Installing..."
+            sudo "${PM}" install "${dep}" -y
+        fi
+    done
+}
+
 
 setup_certificate() {
+    check_dependencies
     # Ask the user if they want to use a domain
     read -p "Do you want to use a (domain/https)? (yes/no): " ANSWER
 
@@ -68,8 +87,7 @@ setup_certificate() {
 }
 
 install_centos() {
-  package
-  
+  check_dependencies
   setup_certificate
   
   # Check if ntfy is already installed
@@ -112,7 +130,7 @@ uninstall_ntfy_centos() {
 
 # Function to install ntfy
 install_ntfy() {
-  package
+  check_dependencies
   
   if dpkg -s ntfy &> /dev/null; then
     echo "ntfy is already installed."
