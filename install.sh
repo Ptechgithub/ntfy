@@ -208,13 +208,6 @@ edit_config() {
 
 # install ntfy using Docker
 install_docker_ntfy() {
-  check_dependencies
-  # Check if a Docker container with the ntfy image is already running
-  if docker ps -a | grep -q binwiederhier/ntfy; then
-    echo "ntfy Docker container is already installed and running."
-    return
-  fi
-
   # Check if Docker is installed
   if ! command -v docker &> /dev/null; then
     # Install Docker if it's not installed
@@ -223,6 +216,14 @@ install_docker_ntfy() {
   else
     echo "Docker is already installed."
   fi
+
+  # Check if a Docker container with the ntfy image is already running
+  if docker ps -a | grep -q binwiederhier/ntfy; then
+    echo "ntfy Docker container is already installed and running."
+    return
+  fi
+
+  check_dependencies
   # Set up certificates if needed
   setup_certificate
   # Get the port number from the user
