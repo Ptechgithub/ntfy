@@ -203,7 +203,7 @@ uninstall_ntfy_docker() {
   echo "Stopping and removing the ntfy Docker container..."
   docker stop ntfy-container
   docker rm ntfy-container
-  
+  sudo rm -rf /etc/letsencrypt/live/$DOMAIN
   # Optionally, remove ntfy cache and configuration files
   rm -rf /var/cache/ntfy
   rm -rf /etc/ntfy
