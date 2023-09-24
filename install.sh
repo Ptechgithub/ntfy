@@ -38,7 +38,6 @@ detect_distribution() {
 check_dependencies() {
     detect_architecture
     detect_distribution
-    sudo $PM update -y && $PM upgrade -y
     local dependencies=("nano" "certbot")
     
     for dep in "${dependencies[@]}"; do
@@ -132,6 +131,7 @@ uninstall_ntfy_centos() {
 
 # Function to install ntfy
 install_ntfy() {
+  apt update -y && apt upgrade -y
   check_dependencies
   
   if dpkg -s ntfy &> /dev/null; then
