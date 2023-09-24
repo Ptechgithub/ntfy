@@ -264,11 +264,11 @@ apply() {
   if docker ps -a | grep -q binwiederhier/ntfy; then
     echo "Restarting the ntfy Docker container..."
     docker restart $(docker ps -a | grep binwiederhier/ntfy | awk '{print $1}')
-    echo "Done. Container restarted."
+    echo "Done. Changes applied."
   else
     # If ntfy is not installed via Docker, then restart the ntfy.service
     systemctl restart ntfy
-    echo "Done. Service restarted."
+    echo "Done. Changes applied."
   fi
 }
 
