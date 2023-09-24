@@ -44,7 +44,6 @@ check_dependencies() {
     done
 }
 
-
 setup_certificate() {
     check_dependencies
     # Ask the user if they want to use a domain
