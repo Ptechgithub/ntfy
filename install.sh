@@ -8,7 +8,7 @@ elif [ $(uname -m) = "armv7l" ]; then
 elif [ $(uname -m) = "aarch64" ]; then
     ARCH="arm64"
 else
-    echo "Unsupported architecture. Please add the appropriate condition."
+    echo "Unsupported architecture.."
     exit 1
 fi
 
