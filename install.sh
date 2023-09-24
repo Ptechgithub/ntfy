@@ -193,6 +193,7 @@ uninstall_ntfy() {
 }
 
 edit_config() {
+     check_dependencies
     # Check if the config file exists
     if [ -e /etc/ntfy/server.yml ]; then
         # Edit the config file
@@ -218,10 +219,8 @@ install_docker_ntfy() {
   else
     echo "Docker is already installed."
   fi
-
   # Set up certificates if needed
   setup_certificate
-
   # Get the port number from the user
   read -p "Enter the port number (default is 80): " port
   port=${port:-80}
