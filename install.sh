@@ -57,6 +57,13 @@ setup_certificate() {
 
 install_centos() {
   setup_certificate
+  
+  # Check if ntfy is already installed
+  if rpm -q ntfy &>/dev/null; then
+    echo "ntfy is already installed."
+    return 0
+  fi
+  
   sudo rpm -ivh https://github.com/binwiederhier/ntfy/releases/download/v2.7.0/ntfy_2.7.0_linux_$ARCH.rpm
   sudo systemctl enable ntfy
   # Download the new server.yml from the given URL and save it in /etc/ntfy/
@@ -65,6 +72,7 @@ install_centos() {
   sudo chown ntfy:ntfy /var/log/ntfy.log
   sudo systemctl start ntfy
 }
+
 
 uninstall_ntfy_centos() {
   # Check if the ntfy service is installed
