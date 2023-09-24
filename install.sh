@@ -203,8 +203,8 @@ uninstall_ntfy_docker() {
   # Check if the ntfy service is installed
   if systemctl is-active --quiet ntfy.service; then
     echo "Stopping and removing the ntfy Docker container..."
-    docker stop ntfy-container
-    docker rm ntfy-container
+    docker stop strange_mayer
+    docker rm strange_mayer
     sudo rm -rf /etc/letsencrypt/live/$DOMAIN
     # Optionally, remove ntfy cache and configuration files
     rm -rf /var/cache/ntfy
