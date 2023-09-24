@@ -194,15 +194,8 @@ install_docker_ntfy() {
   port=${port:-80}
 
   # Run the ntfy Docker command with the user-specified port
-  docker run \
-    -v /var/cache/ntfy:/var/cache/ntfy \
-    -v /etc/ntfy:/etc/ntfy \
-    -p $port:80 \  # Use the user-specified port
-    -it \
-    binwiederhier/ntfy \
-    serve \
-    --cache-file /var/cache/ntfy/cache.db
-
+  docker run -v /var/cache/ntfy:/var/cache/ntfy -v /etc/ntfy:/etc/ntfy -p $port:80 -it binwiederhier/ntfy serve --cache-file /var/cache/ntfy/cache.db
+  
   echo "ntfy has been installed and is running on port $port."
 }
 
