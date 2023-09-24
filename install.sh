@@ -62,21 +62,21 @@ setup_certificate() {
 
         echo "Setting up permissions for $DOMAIN"
 
-        chmod -q 0755 /etc/letsencrypt/
-        chmod -q 0711 /etc/letsencrypt/live/
-        chmod -q  0750 "/etc/letsencrypt/live/$DOMAIN/"
-        chmod -q  0711 /etc/letsencrypt/archive/
-        chmod -q 0750 "/etc/letsencrypt/archive/$DOMAIN/"
-        chmod -q 0640 "/etc/letsencrypt/archive/$DOMAIN/"*.pem
-        chmod -q 0640 "/etc/letsencrypt/archive/$DOMAIN/privkey"*.pem
-
-        chown -q root:root /etc/letsencrypt/
-        chown -q root:root /etc/letsencrypt/live/
-        chown -q root:ntfy "/etc/letsencrypt/live/$DOMAIN/"
-        chown -q root:root /etc/letsencrypt/archive/
-        chown -q root:ntfy "/etc/letsencrypt/archive/$DOMAIN/"
-        chown -q root:ntfy "/etc/letsencrypt/archive/$DOMAIN/"*.pem
-        chown -q root:ntfy "/etc/letsencrypt/archive/$DOMAIN/privkey"*.pem
+        chmod 0755 /etc/letsencrypt/ 2>/dev/null
+		chmod 0711 /etc/letsencrypt/live/ 2>/dev/null
+		chmod 0750 "/etc/letsencrypt/live/$DOMAIN/" 2>/dev/null
+		chmod 0711 /etc/letsencrypt/archive/ 2>/dev/null
+		chmod 0750 "/etc/letsencrypt/archive/$DOMAIN/" 2>/dev/null
+		chmod 0640 "/etc/letsencrypt/archive/$DOMAIN/"*.pem 2>/dev/null
+		chmod 0640 "/etc/letsencrypt/archive/$DOMAIN/privkey"*.pem 2>/dev/null
+		
+		chown root:root /etc/letsencrypt/ 2>/dev/null
+		chown root:root /etc/letsencrypt/live/ 2>/dev/null
+		chown root:ntfy "/etc/letsencrypt/live/$DOMAIN/" 2>/dev/null
+		chown root:root /etc/letsencrypt/archive/ 2>/dev/null
+		chown root:ntfy "/etc/letsencrypt/archive/$DOMAIN/" 2>/dev/null
+		chown root:ntfy "/etc/letsencrypt/archive/$DOMAIN/"*.pem 2>/dev/null
+		chown root:ntfy "/etc/letsencrypt/archive/$DOMAIN/privkey"*.pem 2>/dev/null
 
         echo "Permissions successfully set for $DOMAIN. Enjoy!"
     else
