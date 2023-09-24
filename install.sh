@@ -1,16 +1,19 @@
 #!/bin/bash
 
-ARCH=""
-if [ $(uname -m) = "x86_64" ]; then
-    ARCH="amd64"
-elif [ $(uname -m) = "armv7l" ]; then
-    ARCH="armhf"
-elif [ $(uname -m) = "aarch64" ]; then
-    ARCH="arm64"
-else
-    echo "Unsupported architecture.."
-    exit 1
-fi
+detect_architecture() {
+    local ARCH=""
+    if [ $(uname -m) = "x86_64" ]; then
+        ARCH="amd64"
+    elif [ $(uname -m) = "armv7l" ]; then
+        ARCH="armhf"
+    elif [ $(uname -m) = "aarch64" ]; then
+        ARCH="arm64"
+    else
+        echo "Unsupported architecture.."
+        exit 1
+    fi
+    echo "$ARCH"
+}
 
 detect_distribution() {
     # Detect the Linux distribution
@@ -33,6 +36,7 @@ detect_distribution() {
 }
 
 check_dependencies() {
+    detect_architecture
     detect_distribution
     sudo $PM update -y && $PM upgrade -y
     local dependencies=("nano" "certbot" "epel-release")
@@ -204,6 +208,7 @@ edit_config() {
 
 # install ntfy using Docker
 install_docker_ntfy() {
+  check_dependencies
   # Check if a Docker container with the ntfy image is already running
   if docker ps -a | grep -q binwiederhier/ntfy; then
     echo "ntfy Docker container is already installed and running."
