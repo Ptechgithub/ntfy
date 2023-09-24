@@ -184,7 +184,7 @@ install_docker_ntfy() {
     curl -fsSL https://get.docker.com -o get-docker.sh && bash get-docker.sh
     
   fi
-
+  setup_certificate
   # Run the ntfy Docker command
   docker run \
     -v /var/cache/ntfy:/var/cache/ntfy \
