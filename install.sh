@@ -212,6 +212,7 @@ install_docker_ntfy() {
     # Install Docker if it's not installed
     echo "Docker is not installed. Installing Docker..."
     curl -fsSL https://get.docker.com -o get-docker.sh && bash get-docker.sh
+    systemctl restart docker
   else
     echo "Docker is already installed."
   fi
