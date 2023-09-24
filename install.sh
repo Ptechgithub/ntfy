@@ -87,7 +87,7 @@ setup_certificate() {
 install_centos() {
   check_dependencies
   setup_certificate
-  
+  sudo $PM install epel-release -y
   # Check if ntfy is already installed
   if rpm -q ntfy &>/dev/null; then
     echo "ntfy is already installed."
