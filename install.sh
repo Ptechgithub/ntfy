@@ -257,7 +257,7 @@ uninstall_ntfy_docker() {
 
 apply(){
   systemctl restart ntfy
-  echo " done. ntfy restarted"
+  echo "Done. Changes applied"
 }
 
 # Main menu
