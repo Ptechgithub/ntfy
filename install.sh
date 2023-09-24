@@ -61,7 +61,6 @@ install_centos() {
   sudo systemctl enable ntfy
   # Download the new server.yml from the given URL and save it in /etc/ntfy/
   sudo curl -fsSL -o /etc/ntfy/server.yml https://raw.githubusercontent.com/Ptechgithub/ntfy/main/server.yml
-  setup_certificate
   touch /var/log/ntfy.log
   sudo chown ntfy:ntfy /var/log/ntfy.log
   sudo systemctl start ntfy
