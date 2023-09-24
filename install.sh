@@ -207,16 +207,19 @@ install_docker_ntfy() {
 }
 
 uninstall_ntfy_docker() {
-  # Stop and remove the ntfy Docker container
-  echo "Stopping and removing the ntfy Docker container..."
-  docker stop ntfy-container
-  docker rm ntfy-container
-  sudo rm -rf /etc/letsencrypt/live/$DOMAIN
-  # Optionally, remove ntfy cache and configuration files
-  rm -rf /var/cache/ntfy
-  rm -rf /etc/ntfy
-  
-  echo "ntfy has been uninstalled."
+  # Check if the ntfy service is installed
+  if systemctl is-active --quiet ntfy.service; then
+    echo "Stopping and removing the ntfy Docker container..."
+    docker stop ntfy-container
+    docker rm ntfy-container
+    sudo rm -rf /etc/letsencrypt/live/$DOMAIN
+    # Optionally, remove ntfy cache and configuration files
+    rm -rf /var/cache/ntfy
+    rm -rf /etc/ntfy
+    echo "ntfy has been uninstalled."
+  else
+    echo "ntfy is not installed, so there's nothing to uninstall."
+  fi
 }
 
 # Main menu
