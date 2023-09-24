@@ -200,18 +200,17 @@ install_docker_ntfy() {
 }
 
 uninstall_ntfy_docker() {
-  # Check if the ntfy service is installed
-  if systemctl is-active --quiet ntfy.service; then
+  # Check if the ntfy Docker container is running
+  if docker ps -a | grep -q strange_mayer; then
     echo "Stopping and removing the ntfy Docker container..."
     docker stop strange_mayer
     docker rm strange_mayer
-    sudo rm -rf /etc/letsencrypt/live/$DOMAIN
     # Optionally, remove ntfy cache and configuration files
     rm -rf /var/cache/ntfy
     rm -rf /etc/ntfy
-    echo "ntfy has been uninstalled."
+    echo "ntfy Docker container has been uninstalled."
   else
-    echo "ntfy is not installed, so there's nothing to uninstall."
+    echo "ntfy Docker container is not running or does not exist, so there's nothing to uninstall."
   fi
 }
 
