@@ -182,20 +182,28 @@ install_docker_ntfy() {
     # Install Docker if it's not installed
     echo "Docker is not installed. Installing Docker..."
     curl -fsSL https://get.docker.com -o get-docker.sh && bash get-docker.sh
-    
+  else
+    echo "Docker is already installed."
   fi
+
+  # Set up certificates if needed
   setup_certificate
-  # Run the ntfy Docker command
+
+  # Get the port number from the user
+  read -p "Enter the port number (default is 80): " port
+  port=${port:-80}
+
+  # Run the ntfy Docker command with the user-specified port
   docker run \
     -v /var/cache/ntfy:/var/cache/ntfy \
     -v /etc/ntfy:/etc/ntfy \
-    -p 80:80 \
+    -p $port:80 \  # Use the user-specified port
     -itd \
     binwiederhier/ntfy \
     serve \
     --cache-file /var/cache/ntfy/cache.db
 
-  echo "ntfy has been installed."
+  echo "ntfy has been installed and is running on port $port."
 }
 
 uninstall_ntfy_docker() {
