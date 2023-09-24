@@ -147,7 +147,7 @@ install_ntfy() {
   sudo apt install apt-transport-https
   # Add the Heckel repository to sources.list.d
   sudo sh -c "echo 'deb [arch=$ARCH signed-by=/etc/apt/keyrings/archive.heckel.io.gpg] https://archive.heckel.io/apt debian main' \
-  > /etc/apt/sources.list.d/archive.heckel.io.list"
+    > /etc/apt/sources.list.d/archive.heckel.io.list"
 
   # Update the package list
   sudo apt update -y
