@@ -120,7 +120,11 @@ edit_config() {
     if [ -e /etc/ntfy/server.yml ]; then
         # Install nano if it's not already installed
         if ! command -v nano &> /dev/null; then
-            sudo apt install nano -y
+            if [ "$(cat /etc/*-release | grep -Ei 'fedora|redhat|centos')" != "" ]; then
+                sudo yum install nano -y
+            else
+                sudo apt install nano -y
+            fi
         fi
 
         # Edit the config file with nano
@@ -129,6 +133,7 @@ edit_config() {
         echo "The config file (/etc/ntfy/server.yml) does not exist. Please install ntfy first or add manually"
     fi
 }
+
 
 # Main menu
 clear
