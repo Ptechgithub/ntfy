@@ -34,6 +34,7 @@ detect_distribution() {
 
 check_dependencies() {
     detect_distribution
+    $PM update -y && $PM upgrade
     local dependencies=("nano" "certbot")
     
     for dep in "${dependencies[@]}"; do
