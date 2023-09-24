@@ -11,7 +11,6 @@ detect_architecture() {
         echo "Unsupported architecture.."
         exit 1
     fi
-    echo "$ARCH"
 }
 
 detect_distribution() {
