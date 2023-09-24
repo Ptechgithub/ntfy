@@ -55,8 +55,6 @@ setup_certificate() {
         read -p "Enter the port for certificate validation (default is 80): " PORT
         PORT="${PORT:-80}"
         
-        sudo $PM install certbot -y
-        
         echo "GET certificates for $DOMAIN on port $PORT"
 
         sudo certbot certonly --standalone --agree-tos --register-unsafely-without-email -d $DOMAIN --preferred-challenges http-01 --http-01-port $PORT
@@ -197,17 +195,12 @@ uninstall_ntfy() {
 edit_config() {
     # Check if the config file exists
     if [ -e /etc/ntfy/server.yml ]; then
-        # Install nano if it's not already installed
-        if ! command -v nano &> /dev/null; then
-        sudo $PM install nano -y
-        fi
-        # Edit the config file with nano
-        sudo nano /etc/ntfy/server.yml
+        # Edit the config file
+        nano /etc/ntfy/server.yml
     else
         echo "The config file (/etc/ntfy/server.yml) does not exist. Please install ntfy first or add manually"
     fi
 }
-
 
 # install ntfy using Docker
 install_docker_ntfy() {
