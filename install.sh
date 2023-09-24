@@ -51,6 +51,12 @@ setup_certificate() {
     fi
 }
 
+centos() {
+  sudo rpm -ivh https://github.com/binwiederhier/ntfy/releases/download/v2.7.0/ntfy_2.7.0_linux_amd64.rpm
+  sudo systemctl enable ntfy 
+  sudo systemctl start ntfy
+}
+
 # Function to install ntfy
 install_ntfy() {
   # Create a directory for apt keyrings
@@ -137,7 +143,11 @@ read -p "Please choose: " choice
 
 case $choice in
   1)
-    install_ntfy
+    if [ "$(cat /etc/*-release | grep -Ei 'fedora|redhat|centos')" != "" ]; then
+        centos
+    else
+        install_ntfy
+    fi
     ;;
   2)
     uninstall_ntfy
