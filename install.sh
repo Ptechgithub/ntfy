@@ -12,6 +12,21 @@ else
     exit 1
 fi
 
+package() {
+    # Detect the package manager
+    if command -v apt &> /dev/null; then
+        PM="apt"
+    elif command -v dnf &> /dev/null; then
+        PM="dnf"
+    elif command -v yum &> /dev/null; then
+        PM="yum"
+    else
+        echo "Unsupported package manager. Please install Certbot manually."
+        exit 1
+    fi
+    
+}
+
 setup_certificate() {
     # Ask the user if they want to use a domain
     read -p "Do you want to use a (domain/https)? (yes/no): " ANSWER
@@ -21,12 +36,9 @@ setup_certificate() {
         read -p "Enter your domain name: " DOMAIN
         read -p "Enter the port for certificate validation (default is 80): " PORT
         PORT="${PORT:-80}"
-
-        if [ "$(cat /etc/*-release | grep -Ei 'fedora|redhat|centos')" != "" ]; then
-                sudo yum install certbot -y
-            else
-                sudo apt install certbot -y
-            fi
+        
+        sudo $PM install certbot -y
+        
         echo "GET certificates for $DOMAIN on port $PORT"
 
         sudo certbot certonly --standalone --agree-tos --register-unsafely-without-email -d $DOMAIN --preferred-challenges http-01 --http-01-port $PORT
@@ -56,6 +68,8 @@ setup_certificate() {
 }
 
 install_centos() {
+  package
+  
   setup_certificate
   
   # Check if ntfy is already installed
@@ -98,6 +112,8 @@ uninstall_ntfy_centos() {
 
 # Function to install ntfy
 install_ntfy() {
+  package
+  
   if dpkg -s ntfy &> /dev/null; then
     echo "ntfy is already installed."
     return
@@ -166,13 +182,8 @@ edit_config() {
     if [ -e /etc/ntfy/server.yml ]; then
         # Install nano if it's not already installed
         if ! command -v nano &> /dev/null; then
-            if [ "$(cat /etc/*-release | grep -Ei 'fedora|redhat|centos')" != "" ]; then
-                sudo yum install nano -y
-            else
-                sudo apt install nano -y
-            fi
+        sudo $PM install nano -y
         fi
-
         # Edit the config file with nano
         sudo nano /etc/ntfy/server.yml
     else
