@@ -22,7 +22,11 @@ setup_certificate() {
         read -p "Enter the port for certificate validation (default is 80): " PORT
         PORT="${PORT:-80}"
 
-        apt install certbot -y
+        if [ "$(cat /etc/*-release | grep -Ei 'fedora|redhat|centos')" != "" ]; then
+                sudo yum install certbot -y
+            else
+                sudo apt install certbot -y
+            fi
         echo "GET certificates for $DOMAIN on port $PORT"
 
         sudo certbot certonly --standalone --agree-tos --register-unsafely-without-email -d $DOMAIN --preferred-challenges http-01 --http-01-port $PORT
