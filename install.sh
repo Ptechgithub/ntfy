@@ -198,7 +198,7 @@ install_docker_ntfy() {
     -v /var/cache/ntfy:/var/cache/ntfy \
     -v /etc/ntfy:/etc/ntfy \
     -p $port:80 \  # Use the user-specified port
-    -itd \
+    -it \
     binwiederhier/ntfy \
     serve \
     --cache-file /var/cache/ntfy/cache.db
