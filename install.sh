@@ -205,6 +205,7 @@ uninstall_ntfy_docker() {
     echo "Stopping and removing the ntfy Docker container..."
     docker stop strange_mayer
     docker rm strange_mayer
+    docker rmi binwiederhier/ntfy
     # Optionally, remove ntfy cache and configuration files
     rm -rf /var/cache/ntfy
     rm -rf /etc/ntfy
