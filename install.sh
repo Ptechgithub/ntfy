@@ -24,8 +24,8 @@ package() {
         echo "Unsupported package manager. Please install Certbot manually."
         exit 1
     fi
-    
 }
+
 
 setup_certificate() {
     # Ask the user if they want to use a domain
