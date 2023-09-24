@@ -195,9 +195,21 @@ install_docker_ntfy() {
     serve \
     --cache-file /var/cache/ntfy/cache.db
 
-  echo "ntfy has been installed using Docker."
+  echo "ntfy has been installed."
 }
 
+uninstall_ntfy_docker() {
+  # Stop and remove the ntfy Docker container
+  echo "Stopping and removing the ntfy Docker container..."
+  docker stop ntfy-container
+  docker rm ntfy-container
+  
+  # Optionally, remove ntfy cache and configuration files
+  rm -rf /var/cache/ntfy
+  rm -rf /etc/ntfy
+  
+  echo "ntfy has been uninstalled."
+}
 
 # Main menu
 clear
@@ -206,8 +218,9 @@ echo ""
 echo "Select an option:"
 echo "1) Install ntfy"
 echo "2) Uninstall ntfy"
-echo "4) install with Docker"
-echo "4) Edit config"
+echo "3) install ntfy_Docker"
+echo "4) Uninstall ntfy_Docker"
+echo "5) Edit config"
 echo "0) Exit"
 read -p "Please choose: " choice
 
@@ -229,7 +242,10 @@ case $choice in
   3)
     install_docker_ntfy
     ;;
-  4)
+  4
+    uninstall_ntfy_docker
+    ;;
+  5)
      edit_config
     ;;
   0)   
