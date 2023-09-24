@@ -1,7 +1,6 @@
 #!/bin/bash
 
 detect_architecture() {
-    local ARCH=""
     if [ $(uname -m) = "x86_64" ]; then
         ARCH="amd64"
     elif [ $(uname -m) = "armv7l" ]; then
@@ -127,7 +126,6 @@ uninstall_ntfy_centos() {
     echo "ntfy is not installed."
   fi
 }
-
 
 # Function to install ntfy
 install_ntfy() {
