@@ -258,7 +258,7 @@ uninstall_ntfy_docker() {
 
 # Main menu
 clear
-echo "By 4--> Peyman * Github.com/Ptechgithub * "
+echo "By --> Peyman * Github.com/Ptechgithub * "
 echo "** NTFY Installer--> PUSH NOTIFICATION**"
 echo ""
 echo "Select an option:"
