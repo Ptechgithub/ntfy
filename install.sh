@@ -1,5 +1,17 @@
 #!/bin/bash
 
+ARCH=""
+if [ $(uname -m) = "x86_64" ]; then
+    ARCH="amd64"
+elif [ $(uname -m) = "armv7l" ]; then
+    ARCH="armhf"
+elif [ $(uname -m) = "aarch64" ]; then
+    ARCH="arm64"
+else
+    echo "Unsupported architecture. Please add the appropriate condition."
+    exit 1
+fi
+
 setup_certificate() {
     # Ask the user if they want to use a domain
     read -p "Do you want to use a (domain/https)? (yes/no): " ANSWER
@@ -48,7 +60,7 @@ install_ntfy() {
   # Install the apt-transport-https package
   sudo apt install apt-transport-https
   # Add the Heckel repository to sources.list.d
-  sudo sh -c "echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/archive.heckel.io.gpg] https://archive.heckel.io/apt debian main' \
+  sudo sh -c "echo 'deb [arch=$ARCH signed-by=/etc/apt/keyrings/archive.heckel.io.gpg] https://archive.heckel.io/apt debian main' \
   > /etc/apt/sources.list.d/archive.heckel.io.list"
 
   # Update the package list
