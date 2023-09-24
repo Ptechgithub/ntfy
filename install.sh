@@ -71,6 +71,7 @@ install_centos() {
   touch /var/log/ntfy.log
   sudo chown ntfy:ntfy /var/log/ntfy.log
   sudo systemctl start ntfy
+  echo "ntfy has been installed."
 }
 
 
