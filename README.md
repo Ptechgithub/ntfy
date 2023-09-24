@@ -1,3 +1,7 @@
+ntfy.sh | Send push notifications to your phone or desktop via PUT/POST
+
+
+## install
 ```
 bash <(curl -fsSL https://raw.githubusercontent.com/Ptechgithub/ntfy/main/install.sh)
 ```
