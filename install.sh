@@ -255,6 +255,11 @@ uninstall_ntfy_docker() {
   fi
 }
 
+apply(){
+  systemctl restart ntfy
+  echo " done. ntfy restarted"
+}
+
 # Main menu
 clear
 echo "By --> Peyman * Github.com/Ptechgithub * "
@@ -267,7 +272,9 @@ echo "----------------------------"
 echo "3) Install ntfy with Docker"
 echo "4) Uninstall ntfy_Docker"
 echo "-----------------------------"
-echo "5) Edit config"
+echo "5) Edit Server( Config)"
+echo "6) Apply Config changes"
+echo "-----------------------------"
 echo "0) Exit"
 read -p "Please choose: " choice
 
@@ -294,6 +301,9 @@ case $choice in
     ;;
   5)
      edit_config
+    ;;
+  6)
+     apply
     ;;
   0)   
     exit
