@@ -253,7 +253,7 @@ case $choice in
   3)
     install_docker_ntfy
     ;;
-  4
+  4)
     uninstall_ntfy_docker
     ;;
   5)
