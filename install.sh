@@ -98,6 +98,11 @@ uninstall_ntfy_centos() {
 
 # Function to install ntfy
 install_ntfy() {
+  if dpkg -s ntfy &> /dev/null; then
+    echo "ntfy is already installed."
+    return
+  fi
+
   # Create a directory for apt keyrings
   sudo mkdir -p /etc/apt/keyrings
   # Download and add the GPG key for the Heckel repository
@@ -125,6 +130,7 @@ install_ntfy() {
   sudo systemctl start ntfy
   echo "ntfy has been installed."
 }
+
 
 # Function to uninstall ntfy
 uninstall_ntfy() {
