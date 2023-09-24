@@ -226,6 +226,10 @@ install_docker_ntfy() {
   check_dependencies
   # Set up certificates if needed
   setup_certificate
+  sudo mkdir -p /etc/ntfy
+  sudo curl -fsSL -o /etc/ntfy/server.yml https://raw.githubusercontent.com/Ptechgithub/ntfy/main/server.yml
+  touch /var/log/ntfy.log
+  sudo chown ntfy:ntfy /var/log/ntfy.log
   # Get the port number from the user
   read -p "Enter the port number (default is 80): " port
   port=${port:-80}
