@@ -206,18 +206,22 @@ install_docker_ntfy() {
 }
 
 uninstall_ntfy_docker() {
-  # Check if the ntfy Docker container is running
-  if docker ps -a | grep -q strange_mayer; then
+  # Find the ID of the ntfy Docker container
+  container_id=$(docker ps -a | grep binwiederhier/ntfy | awk '{print $1}')
+  
+  # Check if a container with the ntfy image exists
+  if [ -n "$container_id" ]; then
     echo "Stopping and removing the ntfy Docker container..."
-    docker stop strange_mayer
-    docker rm strange_mayer
-    docker rmi binwiederhier/ntfy
+    docker stop "$container_id"
+    docker rm "$container_id"
+    
     # Optionally, remove ntfy cache and configuration files
     rm -rf /var/cache/ntfy
     rm -rf /etc/ntfy
+    
     echo "ntfy Docker container has been uninstalled."
   else
-    echo "ntfy Docker container is not running or does not install."
+    echo "ntfy Docker container is not running or does not exist."
   fi
 }
 
