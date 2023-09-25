@@ -107,14 +107,17 @@ install_centos() {
 
 
 uninstall_ntfy_centos() {
-  # Check if the ntfy service is installed
-  if systemctl is-active --quiet ntfy.service; then
-    echo "ntfy is currently installed."
+  # Check if the ntfy package is installed
+  if rpm -q ntfy &>/dev/null; then
+    echo "Uninstalling ntfy..."
 
     # Stop and disable the ntfy service
     sudo systemctl stop ntfy
     sudo systemctl disable ntfy
+
+    # Remove the ntfy package
     sudo rpm -e ntfy
+
     # Additional uninstallation steps
     sudo rm -rf /etc/ntfy
     sudo rm /var/log/ntfy.log
