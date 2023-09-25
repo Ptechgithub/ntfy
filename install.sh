@@ -233,7 +233,7 @@ install_docker_ntfy() {
   # Run the ntfy Docker command with the user-specified port
   docker run -v /var/cache/ntfy:/var/cache/ntfy -v /etc/ntfy:/etc/ntfy -v /etc/letsencrypt:/etc/letsencrypt -p $port:80 -p 443:443 -itd binwiederhier/ntfy serve --cache-file /var/cache/ntfy/cache.db
   
-  echo "ntfy has been installed and is running on port $port."
+  echo "ntfy has been installed and is running on port $port. and (443 : https)"
 }
 
 uninstall_ntfy_docker() {
