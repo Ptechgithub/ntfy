@@ -115,7 +115,6 @@ uninstall_ntfy_centos() {
     sudo systemctl stop ntfy
     sudo systemctl disable ntfy
     sudo rpm -e ntfy
-    sudo rm -rf /etc/letsencrypt/live/$DOMAIN
     # Additional uninstallation steps
     sudo rm -rf /etc/ntfy
     sudo rm /var/log/ntfy.log
@@ -184,7 +183,6 @@ uninstall_ntfy() {
     # Additional uninstallation steps
     sudo rm -rf /etc/ntfy
     sudo rm -rf /etc/apt/keyrings
-    sudo rm -rf /etc/letsencrypt/live/$DOMAIN
     # Remove the Heckel repository file
     sudo rm -f /etc/apt/sources.list.d/archive.heckel.io.list
     sudo rm /var/log/ntfy.log
@@ -249,7 +247,6 @@ uninstall_ntfy_docker() {
     echo "Stopping and removing the ntfy Docker container..."
     docker stop "$container_id"
     docker rm "$container_id"
-    sudo rm -rf /etc/letsencrypt/live/$DOMAIN
     # Optionally, remove ntfy cache and configuration files
     rm -rf /var/cache/ntfy
     rm -rf /etc/ntfy
