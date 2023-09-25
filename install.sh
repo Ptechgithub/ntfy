@@ -102,6 +102,7 @@ install_centos() {
   sudo chown ntfy:ntfy /var/log/ntfy.log
   sudo systemctl start ntfy
   echo "ntfy has been installed."
+ fi
 }
 
 uninstall_ntfy_centos() {
