@@ -24,7 +24,7 @@
 
 #cache file
 #cache-file: "/var/cache/ntfy/cache.db"
-#cache-duration: "24h"
+#cache-duration: "12h"
 
 #cache attachment size
 #attachment-cache-dir: "/var/cache/ntfy/attachments"
