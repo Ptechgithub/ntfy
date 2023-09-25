@@ -130,35 +130,35 @@ install_ntfy() {
   if dpkg -s ntfy &> /dev/null; then
     echo "ntfy is already installed."
   else
-  apt update -y
-  apt upgrade -y
-  check_dependencies
-  # Create a directory for apt keyrings
-  sudo mkdir -p /etc/apt/keyrings
-  # Download and add the GPG key for the Heckel repository
-  curl -fsSL https://archive.heckel.io/apt/pubkey.txt | sudo gpg --dearmor -o /etc/apt/keyrings/archive.heckel.io.gpg
-  # Install the apt-transport-https package
-  sudo apt install apt-transport-https
-  # Add the Heckel repository to sources.list.d
-  sudo sh -c "echo 'deb [arch=$ARCH signed-by=/etc/apt/keyrings/archive.heckel.io.gpg] https://archive.heckel.io/apt debian main' \
-    > /etc/apt/sources.list.d/archive.heckel.io.list"
+    apt update -y
+    apt upgrade -y
+    check_dependencies
+    # Create a directory for apt keyrings
+    sudo mkdir -p /etc/apt/keyrings
+    # Download and add the GPG key for the Heckel repository
+    curl -fsSL https://archive.heckel.io/apt/pubkey.txt | sudo gpg --dearmor -o /etc/apt/keyrings/archive.heckel.io.gpg
+    # Install the apt-transport-https package
+    sudo apt install apt-transport-https
+    # Add the Heckel repository to sources.list.d
+    sudo sh -c "echo 'deb [arch=$ARCH signed-by=/etc/apt/keyrings/archive.heckel.io.gpg] https://archive.heckel.io/apt debian main' \
+      > /etc/apt/sources.list.d/archive.heckel.io.list"
 
-  # Update the package list
-  sudo apt update -y
+    # Update the package list
+    sudo apt update -y
 
-  # Install ntfy
-  sudo apt install ntfy
-  sudo mv /etc/ntfy/server.yml /etc/ntfy/server.yml.bak
-  # Download the new server.yml from the given URL and save it in /etc/ntfy/
-  sudo curl -fsSL -o /etc/ntfy/server.yml https://raw.githubusercontent.com/Ptechgithub/ntfy/main/server.yml
-  setup_certificate
-  touch /var/log/ntfy.log
-  sudo chown ntfy:ntfy /var/log/ntfy.log
-  # Enable and start the ntfy service
-  sudo systemctl daemon-reload
-  sudo systemctl enable ntfy
-  sudo systemctl start ntfy
-  echo "ntfy has been installed."
+    # Install ntfy
+    sudo apt install ntfy
+    sudo mv /etc/ntfy/server.yml /etc/ntfy/server.yml.bak
+    # Download the new server.yml from the given URL and save it in /etc/ntfy/
+    sudo curl -fsSL -o /etc/ntfy/server.yml https://raw.githubusercontent.com/Ptechgithub/ntfy/main/server.yml
+    setup_certificate
+    touch /var/log/ntfy.log
+    sudo chown ntfy:ntfy /var/log/ntfy.log
+    # Enable and start the ntfy service
+    sudo systemctl daemon-reload
+    sudo systemctl enable ntfy
+    sudo systemctl start ntfy
+    echo "ntfy has been installed."
   fi
 }
 
