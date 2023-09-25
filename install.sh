@@ -62,22 +62,11 @@ setup_certificate() {
         sudo certbot certonly --standalone --agree-tos --register-unsafely-without-email -d $DOMAIN --preferred-challenges http-01 --http-01-port $PORT
 
         echo "Setting up permissions for $DOMAIN"
+		chmod 0755 "/etc/letsencrypt/live/$DOMAIN/" 2>/dev/null
+		chown -R root:root /etc/letsencrypt/ /etc/letsencrypt/live/ 2>/dev/null
+        chown -R root:ntfy /etc/letsencrypt/live/$DOMAIN/ /etc/letsencrypt/archive/$DOMAIN/ 2>/dev/null
+        chown root:ntfy /etc/letsencrypt/archive/$DOMAIN/*.pem /etc/letsencrypt/archive/$DOMAIN/privkey*.pem 2>/dev/null
 
-        chmod 0755 /etc/letsencrypt/ 2>/dev/null
-		chmod 0711 /etc/letsencrypt/live/ 2>/dev/null
-		chmod 0750 "/etc/letsencrypt/live/$DOMAIN/" 2>/dev/null
-		chmod 0711 /etc/letsencrypt/archive/ 2>/dev/null
-		chmod 0750 "/etc/letsencrypt/archive/$DOMAIN/" 2>/dev/null
-		chmod 0640 "/etc/letsencrypt/archive/$DOMAIN/"*.pem 2>/dev/null
-		chmod 0640 "/etc/letsencrypt/archive/$DOMAIN/privkey"*.pem 2>/dev/null
-		
-		chown root:root /etc/letsencrypt/ 2>/dev/null
-		chown root:root /etc/letsencrypt/live/ 2>/dev/null
-		chown root:ntfy "/etc/letsencrypt/live/$DOMAIN/" 2>/dev/null
-		chown root:root /etc/letsencrypt/archive/ 2>/dev/null
-		chown root:ntfy "/etc/letsencrypt/archive/$DOMAIN/" 2>/dev/null
-		chown root:ntfy "/etc/letsencrypt/archive/$DOMAIN/"*.pem 2>/dev/null
-		chown root:ntfy "/etc/letsencrypt/archive/$DOMAIN/privkey"*.pem 2>/dev/null
 
         echo "Permissions successfully set for $DOMAIN. Enjoy!"
     else
