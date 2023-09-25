@@ -94,7 +94,6 @@ install_centos() {
     setup_certificate
   # Check if ntfy is already installed
   
-  
   sudo rpm -ivh https://github.com/binwiederhier/ntfy/releases/download/v2.7.0/ntfy_2.7.0_linux_$ARCH.rpm
   sudo systemctl enable ntfy
   # Download the new server.yml from the given URL and save it in /etc/ntfy/
