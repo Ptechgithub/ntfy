@@ -88,12 +88,11 @@ setup_certificate() {
 install_centos() {
   if rpm -q ntfy &>/dev/null; then
     echo "ntfy is already installed."
-  else
-    check_dependencies
-    $PM install epel-release -y
-    setup_certificate
+ else
+  check_dependencies
+  $PM install epel-release -y
+  setup_certificate
   # Check if ntfy is already installed
-  
   sudo rpm -ivh https://github.com/binwiederhier/ntfy/releases/download/v2.7.0/ntfy_2.7.0_linux_$ARCH.rpm
   sudo systemctl enable ntfy
   # Download the new server.yml from the given URL and save it in /etc/ntfy/
