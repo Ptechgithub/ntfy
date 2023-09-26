@@ -5,7 +5,7 @@
 ```
 bash <(curl -fsSL https://raw.githubusercontent.com/Ptechgithub/ntfy/main/install.sh)
 ```
-![1](111)
+![1](https://raw.githubusercontent.com/Ptechgithub/configs/main/media/3.jpg)
 
 - Example commands (type ntfy user --help or ntfy user COMMAND --help for more details):
 
