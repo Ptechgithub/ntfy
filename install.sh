@@ -49,7 +49,7 @@ check_dependencies() {
 setup_certificate() {
     check_dependencies
     # Ask the user if they want to use a domain
-    read -p "Do you want to use a (domain/https)? (yes/no): " ANSWER
+    read -p "Do you want to use a (SSL/https)? (yes/no): " ANSWER
 
     if [ "$ANSWER" = "yes" ]; then
         # Ask for domain and port
